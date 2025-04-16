@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Recursos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="m-0 p-0 flex items-center justify-center py-6">
+    <div
+      class="w-full max-w-md bg-gray-800 text-white p-6 rounded-lg shadow-lg mx-2"
+    >
+      <h1 class="text-xl font-bold text-center mb-6">Calculadora de Custo</h1>
+      <form onsubmit="event.preventDefault(); calcular();" class="space-y-4">
+        <div>
+          <label for="cpu" class="block mb-1 font-semibold">CPU</label>
+          <div class="flex">
+            <input
+              type="number"
+              id="cpu"
+              value="1"
+              min="0"
+              class="flex-1 rounded-l-md border border-gray-300 focus:outline-none text-black px-2 py-2"
+              oninput="calcular()"
+            />
+            <span
+              class="inline-flex items-center justify-center px-3 rounded-r-md bg-blue-600 text-white w-24"
+            >
+              Núcleos
+            </span>
+          </div>
+        </div>
+        <div>
+          <label for="ram" class="block mb-1 font-semibold">Memória RAM</label>
+          <div class="flex">
+            <input
+              type="number"
+              id="ram"
+              value="2"
+              min="0"
+              class="flex-1 rounded-l-md border border-gray-300 focus:outline-none text-black px-2 py-2"
+              oninput="calcular()"
+            />
+            <span
+              class="inline-flex items-center justify-center px-3 rounded-r-md bg-blue-600 text-white w-24"
+            >
+              GB
+            </span>
+          </div>
+        </div>
+        <div>
+          <label for="ssd" class="block mb-1 font-semibold"
+            >Armazenamento SSD</label
+          >
+          <div class="flex">
+            <input
+              type="number"
+              id="ssd"
+              value="20"
+              min="0"
+              class="flex-1 rounded-l-md border border-gray-300 focus:outline-none text-black px-2 py-2"
+              oninput="calcular()"
+            />
+            <span
+              class="inline-flex items-center justify-center px-3 rounded-r-md bg-blue-600 text-white w-24"
+            >
+              GB
+            </span>
+          </div>
+        </div>
+      </form>
+      <div class="mt-6 p-3 bg-gray-700 rounded text-center text-2xl font-bold">
+        Total: R$ <span id="total">0,00</span>
+      </div>
+    </div>
+    <script>
+      function calcular() {
+        const ram = parseFloat(document.getElementById("ram").value || 0) * 19;
+        const cpu = parseFloat(document.getElementById("cpu").value || 0) * 11;
+        const ssd = parseFloat(document.getElementById("ssd").value || 0) * 1.2;
+        const total = ram + cpu + ssd;
+        document.getElementById("total").innerText = total
+          .toFixed(2)
+          .replace(".", ",");
+      }
+      window.onload = calcular;
+    </script>
+  </body>
+</html>
